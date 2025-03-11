@@ -4,20 +4,20 @@
 # Return a pandas dataframe with data set to be mined.
 # data_file will be populated with a string 
 # corresponding to a path to the adult.csv file.
+import pandas as pd
 def read_csv_1(data_file):
-	pass
-
+	return pd.read_csv(data_file)
 # Return the number of rows in the pandas dataframe df.
 def num_rows(df):
-	pass
+	return df.shape[0]
 
 # Return a list with the column names in the pandas dataframe df.
 def column_names(df):
-	pass
+	return df.columns.tolist()
 
 # Return the number of missing values in the pandas dataframe df.
 def missing_values(df):
-	pass
+	return df.isnull().sum().sum()
 
 # Return a list with the columns names containing at least one missing value in the pandas dataframe df.
 def columns_with_missing_values(df):
