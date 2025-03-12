@@ -21,31 +21,32 @@ def missing_values(df):
 
 # Return a list with the columns names containing at least one missing value in the pandas dataframe df.
 def columns_with_missing_values(df):
-	pass
+	return df.columns[df.isnull().any()].tolist()
 
 # Return the percentage of instances corresponding to persons whose education level is 
 # Bachelors or Masters (by rounding to the first decimal digit)
 # in the pandas dataframe df containing the data set in the adult.csv file.
 # For example, if the percentage is 21.547%, then the function should return 21.6.
 def bachelors_masters_percentage(df):
-	pass
+	return round((df[df['education'].isin(['Bachelors','Masters'])].shape[0]/df.shape[0])*100,1)
 
 # Return a pandas dataframe (new copy) obtained from the pandas dataframe df 
 # by removing all instances with at least one missing value.
 def data_frame_without_missing_values(df):
-	pass
+	return df.dropna()
 
 # Return a pandas dataframe (new copy) from the pandas dataframe df 
 # by converting the df categorical attributes to numeric using one-hot encoding.
 # The function's output should not contain the target attribute.
 def one_hot_encoding(df):
-	pass
+	return pd.get_dummies(df)
 
 # Return a pandas series (new copy), from the pandas dataframe df, 
 # containing only one column with the labels of the df instances
 # converted to numeric using label encoding. 
 def label_encoding(df):
-	pass
+	
+	
 
 # Given a training set X_train containing the input attribute values 
 # and labels y_train for the training instances,
