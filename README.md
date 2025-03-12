@@ -1,7 +1,8 @@
 # Decision Tree Classifier for Income Prediction
 
 ## Overview
-This project implements a **Decision Tree Classifier** to predict whether an individual's income is **≤ 50K or > 50K** based on attributes like age, working hours, and education level. The model is trained on given data, and the training error rate is computed.
+This project implements a **Decision Tree Classifier** on adult data set (https://archive.ics.uci.edu/ml/datasets/Adult) from the
+UCI Machine Learning Repository to predict whether an individual's income is **≤ 50K or > 50K** based on attributes like age, working hours, and education level. The model is trained on given data, and the training error rate is computed.
 
 ## Requirements
 Install dependencies using:
@@ -10,20 +11,7 @@ pip install pandas scikit-learn
 ```
 
 ## Usage
-### 1. Load Data
-```python
-import pandas as pd
-
-df = pd.DataFrame({
-    'Age': [25, 45, 35, 50],
-    'HoursPerWeek': [40, 50, 60, 45],
-    'Education': [10, 14, 16, 12],
-    'Income': ['<=50K', '>50K', '>50K', '<=50K']
-})
-
-X_train = df.drop(columns=['Income'])  # Input features
-y_train = df['Income']  # Labels
-```
+### 1. Load Data and Pre-process
 
 ### 2. Train and Predict
 ```python
@@ -53,7 +41,7 @@ Training Error Rate: 0.0000
 3. Computes **training error rate**.
 4. Returns a **pandas Series** with predictions.
 
-## Customization
+## Customization by Changing Classifier Parameters
 Modify `DecisionTreeClassifier` parameters for better performance:
 ```python
 clf = DecisionTreeClassifier(max_depth=5, min_samples_split=10, random_state=42)
