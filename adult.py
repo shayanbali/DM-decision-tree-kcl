@@ -50,19 +50,8 @@ def one_hot_encoding(df):
 # converted to numeric using label encoding. 
 # Is it correct to use label encoding for the target attribute?
 def label_encoding(df, target_column=None):
-    """
-    Convert the labels in the target column of df to numeric using label encoding.
-
-    Parameters:
-    df (pd.DataFrame): The input DataFrame.
-    target_column (str, optional): The name of the column containing labels.
-
-    Returns:
-    pd.Series: A new Series with numeric labels.
-    """
 	if target_column is None:
 		target_column = "class"
-
 	le = LabelEncoder()
 	return pd.Series(le.fit_transform(df[target_column]), index=df.index, name=target_column)
 
