@@ -5,8 +5,12 @@
 # data_file will be populated with a string 
 # corresponding to a path to the adult.csv file.
 import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.tree import DecisionTreeClassifier
 def read_csv_1(data_file):
-	return pd.read_csv(data_file)
+	df = pd.read_csv(data_file)
+	df = df.drop('fnlwgt', axis=1)
+	return df
 # Return the number of rows in the pandas dataframe df.
 def num_rows(df):
 	return df.shape[0]
@@ -44,8 +48,24 @@ def one_hot_encoding(df):
 # Return a pandas series (new copy), from the pandas dataframe df, 
 # containing only one column with the labels of the df instances
 # converted to numeric using label encoding. 
-def label_encoding(df):
-	
+# Is it correct to use label encoding for the target attribute?
+def label_encoding(df, target_column=None):
+    """
+    Convert the labels in the target column of df to numeric using label encoding.
+
+    Parameters:
+    df (pd.DataFrame): The input DataFrame.
+    target_column (str, optional): The name of the column containing labels.
+
+    Returns:
+    pd.Series: A new Series with numeric labels.
+    """
+    if target_column is None:
+        raise ValueError("You must specify the target column for label encoding.")
+
+    le = LabelEncoder()
+    return pd.Series(le.fit_transform(df[target_column]), index=df.index, name=target_column)
+
 	
 
 # Given a training set X_train containing the input attribute values 
@@ -53,13 +73,16 @@ def label_encoding(df):
 # build a decision tree and use it to predict labels for X_train. 
 # Return a pandas series with the predicted values. 
 def dt_predict(X_train,y_train):
-	pass
+	clf = DecisionTreeClassifier()
+	clf.fit(X_train,y_train)
+	return clf.predict(X_train)
 
 # Given a pandas series y_pred with the predicted labels and a pandas series y_true with the true labels,
 # compute the error rate of the classifier that produced y_pred.  
 def dt_error_rate(y_pred, y_true):
-	pass
+	return 1 - (y_pred == y_true).mean()
 
 
 
 
+print(read_csv_1('/workspaces/codespaces-blank/DM-decision-tree-kcl/adult.csv'))
