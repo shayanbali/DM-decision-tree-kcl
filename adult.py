@@ -61,9 +61,10 @@ def label_encoding(df, target_column=None):
     pd.Series: A new Series with numeric labels.
     """
     if target_column is None:
-        raise ValueError("You must specify the target column for label encoding.")
+        # raise ValueError("You must specify the target column for label encoding.")
+		target_column = "class"
 
-    le = LabelEncoder()
+	le = LabelEncoder()
     return pd.Series(le.fit_transform(df[target_column]), index=df.index, name=target_column)
 
 	
